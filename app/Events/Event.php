@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace ImagesManager\Events;
 
 abstract class Event {
 

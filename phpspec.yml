@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: ImagesManager
+        psr4_prefix: ImagesManager
         src_path: app

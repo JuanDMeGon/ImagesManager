@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace ImagesManager\Commands;
 
 abstract class Command {
 
