@@ -32,7 +32,7 @@ class Authenticate {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if ($this->auth->guest())
+		/*if ($this->auth->guest())
 		{
 			if ($request->ajax())
 			{
@@ -42,7 +42,7 @@ class Authenticate {
 			{
 				return redirect()->guest('auth/login');
 			}
-		}
+		}*/
 
 		return $next($request);
 	}
