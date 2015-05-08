@@ -5,6 +5,10 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use ImagesManager\User;
+use ImagesManager\Http\Requests\PasswordRecoveryRequest;
+use Hash;
+
 class AuthController extends Controller {
 
 	/*
@@ -40,9 +44,25 @@ class AuthController extends Controller {
 		return view('auth.recover');
 	}
 
-	public function postRecoverPassword()
+	public function postRecoverPassword(PasswordRecoveryRequest $request)
 	{
-		return 'recovering password';
+		$question = $request->get('question');
+		$answer = $request->get('answer');
+
+		$user = User::where('email', $request->get('email'))->first();
+
+		if($user->question === $question && Hash::check($answer,$user->answer))
+		{
+			$user->password = bcrypt($request->get('password'));
+
+			$user->save();
+
+			return redirect('auth/login')
+			->with(['success' => 'The password was changed']);
+		}
+
+		return redirect('auth/recover-password')->withInput($request->only('email', 'question'))
+		->withErrors('The answer or the question doesn\'t match');
 	}
 
 }
