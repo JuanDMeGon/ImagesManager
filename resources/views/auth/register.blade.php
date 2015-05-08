@@ -50,6 +50,27 @@
 						</div>
 
 						<div class="form-group">
+							<label class="col-md-4 control-label">Question</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="question">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Answer</label>
+							<div class="col-md-6">
+								<input type="password" class="form-control" name="answer">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Confirm Answer</label>
+							<div class="col-md-6">
+								<input type="password" class="form-control" name="answer_confirmation">
+							</div>
+						</div>
+
+						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
 									Register
