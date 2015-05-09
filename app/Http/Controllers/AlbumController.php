@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use ImagesManager\Album;
 use Auth;
 
+use ImagesManager\Http\Requests\CreateAlbumRequest;
+
 class AlbumController extends Controller {
 
 	public function __construct()
@@ -23,12 +25,27 @@ class AlbumController extends Controller {
 
 	public function getCreateAlbum()
 	{
-		return 'showing the create album form';
+		return view('albums.create-album');
 	}
 
-	public function postCreateAlbum()
+	public function postCreateAlbum(CreateAlbumRequest $request)
 	{
-		return 'creating album';
+		$user = Auth::user();
+
+		$title = $request->get('title');
+		$description = $request->get('description');
+
+		Album::create
+		(
+			[
+				'title' => $title,
+				'description' => $description,
+				'user_id' => $user->id
+			]
+		);
+
+
+		return redirect('validated/albums/')->with(['album_created' => 'The Album has been created.']);
 	}
 
 	public function getEditAlbum()

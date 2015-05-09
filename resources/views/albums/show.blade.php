@@ -19,6 +19,12 @@
 	</div>
 @endif
 
+@if(Session::has('album_created'))						
+<div class="alert alert-success">
+	<strong>Great!</strong> {{Session::get('album_created')}}<br><br>
+</div>
+@endif
+
 <div class="container-fluid"
 <p><a href="/validated/albums/create-album" class="btn btn-primary" role="button">Create Album</a></p>
 @if(sizeof($albums) > 0)
