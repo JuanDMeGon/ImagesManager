@@ -5,6 +5,9 @@ use ImagesManager\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use ImagesManager\Album;
+use Auth;
+
 class AlbumController extends Controller {
 
 	public function __construct()
@@ -14,7 +17,8 @@ class AlbumController extends Controller {
 
 	public function getIndex()
 	{
-		return 'Showing all the user Albums';
+		$albums = Auth::user()->albums;
+		return view('albums.show', ['albums' => $albums]);
 	}
 
 	public function getCreateAlbum()

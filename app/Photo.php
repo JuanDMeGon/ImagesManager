@@ -10,7 +10,7 @@ class Photo extends Model {
 
 	public function album()
 	{
-		return belongsTo('ImagesManager\Album');
+		return $this->belongsTo('ImagesManager\Album');
 	}
 
 }

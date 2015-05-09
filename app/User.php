@@ -33,7 +33,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function albums()
 	{
-		return hasMany('ImagesManager\Album');
+		return $this->hasMany('ImagesManager\Album');
 	}
 
 }
