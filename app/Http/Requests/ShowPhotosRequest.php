@@ -38,4 +38,9 @@ class ShowPhotosRequest extends Request {
 		];
 	}
 
+	public function forbiddenResponse()
+	{
+		return $this->redirector->to('/');
+	}
+
 }
