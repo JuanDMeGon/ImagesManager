@@ -14,6 +14,12 @@
 	</div>
 @endif
 
+@if(Session::has('photo_created'))
+	<div class="alert alert-success">
+		<p>Session::get('photo_created')</p>
+	</div>
+@endif
+
 <div class="container-fluid">
 <p><a href="/validated/photos/create-photo?id={{$id}}" class="btn btn-primary" role="button">Create Photo</a></p>
 @if(sizeof($photos) > 0)

@@ -9,6 +9,9 @@ use ImagesManager\Http\Requests\ShowPhotosRequest;
 
 use ImagesManager\Album;
 use ImagesManager\Photo;
+use Carbon\Carbon;
+
+use ImagesManager\Http\Requests\CreatePhotoRequest;
 
 class PhotoController extends Controller {
 
@@ -25,14 +28,27 @@ class PhotoController extends Controller {
 		return view('photos.show', ['photos' => $photos, 'id' => $request->get('id')]);
 	}
 
-	public function getCreatePhoto()
+	public function getCreatePhoto(Request $request)
 	{
-		return 'showing the create Photo form';
+		$id = $request->get('id');
+
+		return view('photos.create-photo', ['id' => $id]);
 	}
 
-	public function postCreatePhoto()
+	public function postCreatePhoto(CreatePhotoRequest $request)
 	{
-		return 'creating Photo';
+		$image = $request->file('image');
+		$id = $request->get('id');
+		Photo::create
+		(
+			[
+				'title' => $request->get('title'),
+				'description' => $request->get('description'),
+				'path' => $this->createImage($image),
+				'album_id' => $id
+			]
+		);
+		return redirect("validated/photos?id=$id")->with(['photo_created' => 'The photo has been created']);
 	}
 
 	public function getEditPhoto()
@@ -48,6 +64,17 @@ class PhotoController extends Controller {
 	public function postDeletePhoto()
 	{
 		return 'deleting Photo';
+	}
+
+	public function createImage($image)
+	{
+		$path = '/img/';
+
+		$name = sha1(Carbon::now()).'.'.$image->guessExtension();
+
+		$image->move(getcwd().$path, $name);
+
+		return $path.$name;
 	}
 
 }
