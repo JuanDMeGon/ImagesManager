@@ -5,6 +5,11 @@ use ImagesManager\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use ImagesManager\Http\Requests\ShowPhotosRequest;
+
+use ImagesManager\Album;
+use ImagesManager\Photo;
+
 class PhotoController extends Controller {
 
 	public function __construct()
@@ -12,9 +17,12 @@ class PhotoController extends Controller {
 		$this->middleware('auth');
 	}
 
-	public function getIndex()
+	public function getIndex(ShowPhotosRequest $request)
 	{
-		return 'Showing all the album photos';
+		$photos = Album::find($request->get('id'))->photos;
+
+
+		return view('photos.show', ['photos' => $photos, 'id' => $request->get('id')]);
 	}
 
 	public function getCreatePhoto()
