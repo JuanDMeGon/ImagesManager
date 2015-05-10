@@ -9,6 +9,7 @@ use ImagesManager\Album;
 use Auth;
 
 use ImagesManager\Http\Requests\CreateAlbumRequest;
+use ImagesManager\Http\Requests\EditAlbumRequest;
 
 class AlbumController extends Controller {
 
@@ -48,14 +49,22 @@ class AlbumController extends Controller {
 		return redirect('validated/albums/')->with(['album_created' => 'The Album has been created.']);
 	}
 
-	public function getEditAlbum()
+	public function getEditAlbum($id)
 	{
-		return 'showing the Edit album form';
+		$album = Album::find($id);
+		return view('albums.edit-album', ['album' => $album]);
 	}
 
-	public function postEditAlbum()
+	public function postEditAlbum(EditAlbumRequest $request)
 	{
-		return 'editing album';
+		$album = Album::find($request->get('id'));
+		
+		$album->title = $request->get('title');
+		$album->description = $request->get('description');
+
+		$album->save();
+
+		return redirect('validated/albums')->with(['edited' => 'The album has been edited']);
 	}
 
 	public function postDeleteAlbum()
