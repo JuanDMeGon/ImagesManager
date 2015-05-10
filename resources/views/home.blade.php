@@ -19,6 +19,7 @@
 			@if (Session::has('edited'))
 				<div class="alert alert-success">
 					<strong>Great!</strong> {{Session::get('edited')}}.<br><br>
+				</div>
 			@endif
 				<div class="panel-heading">Home</div>
 
