@@ -43,4 +43,9 @@ class CreatePhotoRequest extends Request {
 		];
 	}
 
+	public function forbiddenResponse()
+	{
+		return $this->redirector->to('/');
+	}
+
 }
