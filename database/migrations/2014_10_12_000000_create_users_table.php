@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('question');
 			$table->string('answer', 60);
 			$table->rememberToken();
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

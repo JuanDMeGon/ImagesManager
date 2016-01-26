@@ -20,7 +20,7 @@ class CreatePhotosTable extends Migration {
 			$table->string('path');
 			$table->integer('album_id')->unsigned();
 			$table->foreign('album_id')->references('id')->on('albums');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 
