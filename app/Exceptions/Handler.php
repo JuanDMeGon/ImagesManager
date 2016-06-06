@@ -2,7 +2,6 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
